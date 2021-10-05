@@ -8,11 +8,11 @@ export default function LoginForm({ onLogin }) {
     function handleSubmit(e) {
         e.preventDefault();
         setIsLoading(true);
-        fetch("http://localhost:4002/login", {
+        fetch("/login", {
             method: "POST",
             headers: {
-                Accept: "*/*",
                 "Content-Type": "application/json",
+                Accept: "*/*",
             },
             body: JSON.stringify({ username, password }),
         }).then((res) => {

@@ -6,20 +6,22 @@ export default function SignupForm({ onLogin }) {
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
     // const [isLoading, setIsLoading] = useState(false);
 
+    const user = {
+        username,
+        password,
+        password_confirmation: passwordConfirmation,
+    }
+
     function handleSubmit(e) {
         e.preventDefault();
-        const user = {
-            username,
-            password,
-            password_confirmation: passwordConfirmation,
-        }
+        
         fetch("/signup", {
             method: "POST",
             headers: {
-                Accept: "*/*",
                 "Content-Type": "application/json",
+                Accept: "*/*",
             },
-            body: JSON.stringify(user),
+            body: JSON.stringify({user}),
         })
         .then((res) => {
             if (res.ok) {
