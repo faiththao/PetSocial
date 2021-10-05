@@ -6,7 +6,7 @@ export default function Login({ onLogin }) {
     const [showLogin, setShowLogin] = useState(true);
 
     return (
-        <container>
+        <div>
             <h1>Login or Sign Up</h1>
             {showLogin ? (
                 <>
@@ -31,6 +31,6 @@ export default function Login({ onLogin }) {
                     </p>
                 </>
             )}
-        </container>
+        </div>
     )
 }

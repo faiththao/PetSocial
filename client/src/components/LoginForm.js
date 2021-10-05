@@ -3,32 +3,29 @@ import { useState } from "react";
 export default function LoginForm({ onLogin }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [errors, setErrors] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
     function handleSubmit(e) {
         e.preventDefault();
         setIsLoading(true);
-        fetch("/login", {
+        fetch("http://localhost:4002/login", {
             method: "POST",
             headers: {
-                // Accept: "*/*",
+                Accept: "*/*",
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({ username, password }),
-        }).then((r) => {
+        }).then((res) => {
             setIsLoading(false);
-            if (r.ok) {
-                r.json().then((user) => onLogin(user));
-            } else {
-                r.json().then((err) => setErrors(err.errors));
+            if (res.ok) {
+                res.json().then((user) => onLogin(user));
             }
         });
     }
 
     return (
-        <form>
-            <h2>Username</h2>
+        <form onClick={handleSubmit}>
+            <h2 htmlFor="username">Username</h2>
             <input
                 type="text"
                 id="username"
@@ -36,7 +33,7 @@ export default function LoginForm({ onLogin }) {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
             />
-            <h2>Password</h2>
+            <h2 htmlFor="password">Password</h2>
             <input
                 type="password"
                 id="password"
@@ -44,7 +41,7 @@ export default function LoginForm({ onLogin }) {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />  
-            <button variant="fill" color="primary" type="submit" onClick={handleSubmit}>
+            <button variant="fill" color="primary" type="submit" >
                 {isLoading ? "Loading..." : "Login"}
             </button>
         </form>

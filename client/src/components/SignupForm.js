@@ -4,40 +4,35 @@ export default function SignupForm({ onLogin }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
-    // const [errors, setErrors] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    // const [isLoading, setIsLoading] = useState(false);
 
     function handleSubmit(e) {
         e.preventDefault();
-        setErrors([]);
-        setIsLoading(true);
+        const user = {
+            username,
+            password,
+            password_confirmation: passwordConfirmation,
+        }
         fetch("/signup", {
             method: "POST",
             headers: {
-                // Accept: "*/*",
+                Accept: "*/*",
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({
-                username,
-                password,
-                password_confirmation: passwordConfirmation,
-            }),
+            body: JSON.stringify(user),
         })
-        .then((r) => r.json())
-        .then(onLogin)
-            // setIsLoading(false);
-            // if (r.ok) {
-            //     r.json().then((user) => onLogin(user));
-            // } else {
-            //     r.json().then((err) => setErrors(err.errors));
-            // }
-
+        .then((res) => {
+            if (res.ok) {
+              res.json()
+              .then((user) => onLogin(user));
+            }
+        });
     }
     
 
     return (
-        <form>
-            <h2>Username</h2>
+        <form onClick={handleSubmit}>
+            <h2 htmlFor="username">Username</h2>
             <input
                 type="text"
                 id="username"
@@ -45,7 +40,7 @@ export default function SignupForm({ onLogin }) {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
             />
-            <h2>Password</h2>
+            <h2 htmlFor="password">Password</h2>
             <input
                 type="password"
                 id="password"
@@ -53,7 +48,7 @@ export default function SignupForm({ onLogin }) {
                 onChange={(e) => setPassword(e.target.value)}
                 autoComplete="current-password"
             />
-            <h2>Confrim Password</h2>
+            <h2 htmlFor="password">Confrim Password</h2>
             <input
                 type="password"
                 id="password_confirmation"
@@ -61,14 +56,10 @@ export default function SignupForm({ onLogin }) {
                 onChange={(e) => setPasswordConfirmation(e.target.value)}
                 autoComplete="current-password"
             />
-            <button type="submit" onClick={handleSubmit}>
-                {isLoading ? "Loading..." : "Sign Up"}
+            <button type="submit">
+                {/* {isLoading ? "Loading..." : "Sign Up"} */}
+                Sign Up
             </button>
-            <h3>
-                {errors.map((err) => (
-                    <h3 key={err}>{err}</h3>
-                ))}
-            </h3>
         </form>
     )
 }
