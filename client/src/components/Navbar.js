@@ -2,7 +2,13 @@ import { Link } from "react-router-dom";
 
 export default function Navbar() {
     function handleLogoutClick({ user, setUser }) {
-        fetch("/logout", { method: "DELETE" }).then((r) => {
+        fetch("/logout", { 
+          method: "DELETE",
+          headers: {
+            Accept: "*/*",
+            "Content-type": "application/json"
+          }, 
+        }).then((r) => {
           if (r.ok) {
             setUser(null);
           }
