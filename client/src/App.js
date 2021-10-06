@@ -10,6 +10,7 @@ import Posts from './pages/Posts'
 
 function App() {
   const [user, setUser] = useState(null);
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     fetch("/me")
@@ -21,6 +22,12 @@ function App() {
     });
   }, []);
 
+  useEffect(() => {
+      fetch("/posts")
+      .then(res => res.json())
+      .then(json => setPosts(json))
+  }, [])
+
   if (!user) return <Login onLogin={setUser} />;
 
   return (
@@ -31,8 +38,8 @@ function App() {
         <Route path="/new-post">
           <NewPost user={user} />
         </Route>
-        <Route path="/">
-          <Posts />
+        <Route path="/explore">
+          <Posts posts={posts} />
         </Route>
       </Switch>
     </main>
