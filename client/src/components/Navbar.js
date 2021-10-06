@@ -19,12 +19,15 @@ export default function Navbar() {
         Navbar
         <Link to="/">Pet Social</Link>
         <div>
-            <button as={Link} to="/new">
-                New Post
-            </button>
-            <button onClick={handleLogoutClick}>
-                Logout
-            </button>
+          <button as={Link} to="/expore">
+            Explore
+          </button>
+          <button as={Link} to="/new-post">
+              New Post
+          </button>
+          <button onClick={handleLogoutClick}>
+              Logout
+          </button>
         </div>
         </>
     )
