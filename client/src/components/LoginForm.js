@@ -24,7 +24,7 @@ export default function LoginForm({ onLogin }) {
     }
 
     return (
-        <form onClick={handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <h2 htmlFor="username">Username</h2>
             <input
                 type="text"

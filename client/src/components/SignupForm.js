@@ -33,7 +33,7 @@ export default function SignupForm({ onLogin }) {
     
 
     return (
-        <form onClick={handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <h2 htmlFor="username">Username</h2>
             <input
                 type="text"
@@ -58,7 +58,7 @@ export default function SignupForm({ onLogin }) {
                 onChange={(e) => setPasswordConfirmation(e.target.value)}
                 autoComplete="current-password"
             />
-            <button type="submit">
+            <button type="submit" >
                 {/* {isLoading ? "Loading..." : "Sign Up"} */}
                 Sign Up
             </button>
