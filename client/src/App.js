@@ -1,48 +1,50 @@
 // import logo from './logo.svg';
 import './App.css';
-import { Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import NewPost from './pages/NewPost';
-import Login from './pages/Login'
-import Navbar from './components/Navbar';
-import Posts from './pages/Posts'
+import Login from './pages/Login';
+import AuthenticatedApp from './AuthenticatedApp';
+import UnauthenticatedApp from './UnauthenticatedApp';
 
 
 function App() {
   const [user, setUser] = useState(null);
-  const [posts, setPosts] = useState([]);
+  const [authChecked, setAuthChecked] = useState(false);
+  
 
   useEffect(() => {
-    fetch("/me")
+    fetch("/api/me", {
+      credentials: 'include'
+    })
     .then((res) => {
       if (res.ok) {
         res.json()
-        .then((user) => setUser(user));
+        .then((user) => {
+          setUser(user)
+          setAuthChecked(true)})
+      } else {
+        setAuthChecked(true)
       }
     });
   }, []);
 
-  useEffect(() => {
-      fetch("/posts")
-      .then(res => res.json())
-      .then(json => setPosts(json))
-  }, [])
 
-  if (!user) return <Login onLogin={setUser} />;
+  if (!authChecked) return <Login onLogin={setUser} />;
 
   return (
     <>
-    <Navbar user={user} setUser={setUser} />
-    <main>
-      <Switch>
-        <Route path="/new-post">
-          <NewPost user={user} />
-        </Route>
-        <Route path="/explore">
-          <Posts posts={posts} />
-        </Route>
-      </Switch>
-    </main>
+    <Router>
+      {user ? (
+        <AuthenticatedApp
+          setUser={setUser}
+          user={user}
+        />
+      ) : (
+        <UnauthenticatedApp
+          setUser={setUser}
+        />
+      )}
+    </Router>
     </>
   );
 }

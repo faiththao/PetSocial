@@ -1,14 +1,16 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
-export default function LoginForm({ onLogin }) {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+export default function LoginForm({ setUser }) {
+    // const history = useHistory()
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
     function handleSubmit(e) {
         e.preventDefault();
         setIsLoading(true);
-        fetch("/login", {
+        fetch("/api/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -18,9 +20,16 @@ export default function LoginForm({ onLogin }) {
         }).then((res) => {
             setIsLoading(false);
             if (res.ok) {
-                res.json().then((user) => onLogin(user));
+                res.json().then((user) => {
+                    setUser(user)
+                    // history.push('/explore')
+                })
+            } else {
+                res.json().then(errors => {
+                    console.error(errors)
+                })
             }
-        });
+        })
     }
 
     return (
@@ -40,7 +49,7 @@ export default function LoginForm({ onLogin }) {
                 autoComplete="current-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-            />  
+            />
             <button variant="fill" color="primary" type="submit" >
                 {isLoading ? "Loading..." : "Login"}
             </button>

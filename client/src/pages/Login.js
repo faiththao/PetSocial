@@ -2,15 +2,37 @@ import { useState } from "react"
 import LoginForm from '../components/LoginForm'
 import SignupForm from '../components/SignupForm'
 
-export default function Login({ onLogin }) {
+export default function Login({ setUser }) {
     const [showLogin, setShowLogin] = useState(true);
+
+    const signup = (formData) => {
+        fetch("/api/signup", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "*/*",
+            },
+            body: JSON.stringify(formData),
+        })
+            .then(res => {
+                if (res.ok) {
+                    return res.json()
+                        .then((user) => {
+                            setUser(user)
+                        })
+                } else {
+                    return res.json().then(errors => Promise.reject(errors))
+                    }
+                }
+            )
+    }
 
     return (
         <div>
             <h1>Login or Sign Up</h1>
             {showLogin ? (
                 <>
-                    <LoginForm onLogin={onLogin} />
+                    <LoginForm signup={signup} setUser={setUser} />
                     <br />
                     <p>
                         Don't have an account? &nbsp;
@@ -21,7 +43,7 @@ export default function Login({ onLogin }) {
                 </>
             ) : (
                 <>
-                    <SignupForm onLogin={onLogin} />
+                    <SignupForm setUser={setUser} />
                     <br />
                     <p>
                         Already have an account? &nbsp;

@@ -1,36 +1,24 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
-export default function SignupForm({ onLogin }) {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [passwordConfirmation, setPasswordConfirmation] = useState("");
+export default function SignupForm({ signup }) {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [passwordConfirmation, setPasswordConfirmation] = useState('');
     // const [isLoading, setIsLoading] = useState(false);
-
-    const user = {
-        username,
-        password,
-        password_confirmation: passwordConfirmation,
-    }
-
-    function handleSubmit(e) {
-        e.preventDefault();
-        
-        fetch("/signup", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "*/*",
-            },
-            body: JSON.stringify({user}),
-        })
-        .then((res) => {
-            if (res.ok) {
-              res.json()
-              .then((user) => onLogin(user));
-            }
-        });
-    }
+    // const history = useHistory()
     
+    function handleSubmit(e) {
+        e.preventDefault()
+        signup({
+            username,
+            password,
+            password_confirmation: passwordConfirmation,
+        })
+        setUsername('')
+        setPassword('')
+        setPasswordConfirmation('')
+    }
 
     return (
         <form onSubmit={handleSubmit}>
@@ -38,7 +26,7 @@ export default function SignupForm({ onLogin }) {
             <input
                 type="text"
                 id="username"
-                autoComplete="off"
+                // autoComplete="off"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
             />
@@ -48,7 +36,7 @@ export default function SignupForm({ onLogin }) {
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                autoComplete="current-password"
+                // autoComplete="current-password"
             />
             <h2 htmlFor="password">Confrim Password</h2>
             <input
@@ -56,7 +44,7 @@ export default function SignupForm({ onLogin }) {
                 id="password_confirmation"
                 value={passwordConfirmation}
                 onChange={(e) => setPasswordConfirmation(e.target.value)}
-                autoComplete="current-password"
+                // autoComplete="current-password"
             />
             <button type="submit" >
                 {/* {isLoading ? "Loading..." : "Sign Up"} */}
