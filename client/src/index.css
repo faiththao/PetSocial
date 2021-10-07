@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  font-family: Helvetica;
+  box-sizing: border-box;
+  text-align: center;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -8,6 +14,98 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: Arial, Helvetica, sans-serif,
     monospace;
 }
+
+body {
+  padding: 20px;
+  text-align: center;
+  background-color: #d38116;
+} 
+
+h1 {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.image-card {
+  width: 350px;
+  justify-content: center;
+  border: 15px solid #00000090;
+  border-radius: 15px;
+  text-align: center;
+  background-color: white;
+  margin: 0 auto 30px;
+}
+
+.image {
+  width: 300px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.title {
+  text-align: center;
+  padding: 15px 10px;
+  font-size: 1.5rem;
+  font-family: 'Helvetica', serif;
+  color: #000000dd;
+}
+.comments-title {
+  font-size: .9rem;
+  font-weight: 600;
+  text-decoration: underline;
+  line-height: 40px;
+  text-align: center;
+}
+
+.comments {
+  list-style-type: none;
+  margin-left: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 0.85rem;
+}
+
+.comment-form {
+  width: 100%;
+  border-top: 1px solid #00000020;
+  padding: 10px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+
+.comment-input:focus {
+  outline: none;
+}
+
+.comment-input {
+  width: 83%;
+  border: none;
+  font-size: 0.8rem;
+}
+
+.comment-button {
+  border: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgb(92, 114, 238);
+  cursor: pointer;
+  transition: color 300ms;
+}
+
+.comment-button:hover {
+  color: rgb(37, 68, 245);
+}
+
+.comment-button:active {
+  color: rgb(127, 146, 250);
+}
+
+.comment-button:focus {
+  outline: none;
+}
+
