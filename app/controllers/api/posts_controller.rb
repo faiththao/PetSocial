@@ -8,6 +8,27 @@ class Api::PostsController < ApplicationController
         render json: post, status: :created
     end
 
+    # def update
+    #     post = Post.find_by(id: params[:id])
+    #     if post
+    #         post.update(post_params)
+    #         render json: post
+    #     else
+    #         render json: { error: "Post not found" }, status: :not_found
+    #     end
+    # end
+
+    def increment_likes
+        post = Post.find_by(id: params[:id])
+        if post
+            Post.update(likes: bird.likes + 1)
+            render json: post
+        else
+            render json: { error: "Post not found" }, status: :not_found
+        end
+    end
+
+
     private
 
     def post_params

@@ -8,6 +8,16 @@ class Api::CommentsController < ApplicationController
         render json: recipe, status: :created
     end 
 
+    def update
+        comment = Comment.find_by(id: params[:id])
+        if comment
+            comment.update(post_params)
+            render json: comment
+        else
+            render json: { error: "Comment not found" }, status: :not_found
+        end
+    end
+
     private 
 
     def comment_params

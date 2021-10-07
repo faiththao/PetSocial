@@ -3,12 +3,28 @@ import CommentsForm from "./CommentsForm";
 
 export default function PostCard({ post }) {
     const [comments, setComments] = useState([]);
+    const [updateLike, setUpdateLikes] = useState(0);
 
     useEffect(() => {
         fetch("/api/comments")
             .then(res => res.json())
             .then(data => setComments(data))
     })
+
+    // function updateLikes(e) {
+    //     e.preventDefault()
+
+    //     fetch("/api/posts/:id/likes", {
+    //         method: "PATCH",
+    //         headers: {
+    //             Accept: '*/*',
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify()
+    //     })
+    //     .then(res => res.json())
+    //     .then(data => setUpdateLikes(data))
+    // }
 
     const createComment = (formData) => {
         return fetch("/api/comments", {

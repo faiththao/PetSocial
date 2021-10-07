@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   namespace :api do
     resources :comments, only: [:index, :create]
     resources :posts, only: [:index, :create]
+    # patch "/posts/:id/likes" to: "posts#increment_likes"
     post "/signup", to: "users#create"
     get "/me", to: "users#show"
     post "/login", to: "sessions#create"
