@@ -10,6 +10,28 @@ export default function PostCard({ post }) {
             .then(data => setComments(data))
     })
 
+    const createComment = (formData) => {
+        return fetch("/api/comments", {
+            method: "POST",
+            headers: {
+                Accept: '*/*',
+                "Content-Type": "application/json"
+            },
+            credentials: 'include',
+            body: JSON.stringify(formData)
+        })
+        .then(res => {
+            if (res.ok) {
+                return res.json()
+            } else {
+                return res.json().then(errors => Promise.reject(errors))
+            }
+        })
+        .then(comment => {
+            setComments(comments.concat(comment))
+        })
+    }
+
     const {
         id,
         img_url,
@@ -30,11 +52,10 @@ export default function PostCard({ post }) {
                             <h3>{comment.comment}</h3>
                             <button>❤</button>Likes: {likes}
                         </ul>
-                        <CommentsForm key={comment.id} comment={comment} />
                     </div>
                 ))}
             </div>
-            <CommentsForm />
+            <CommentsForm createComment={createComment}/>
         </div>
     )
 }

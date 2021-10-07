@@ -1,45 +1,25 @@
 import { useState } from "react"
 
-export default function CommentsForm({ comment }) {
-    const [newComments, setNewComments] = useState('')
+export default function CommentsForm({ createComment }) {
+    const [comment, setComment] = useState('');
     
-    function handleSubmit() {
-        fetch("/api/comments", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newComments),
+    function handleSubmit(e) {
+        e.preventDefault()
+        createComment({
+            comment,
+            likes: 0,
         })
-            .then((res) => {
-                if (res.ok) {
-                    res.json().then(json => setNewComments([...comment, json]))
-                }
-            })
-}
-
-
-
-function onSubmit(e) {
-    e.preventDefault();
-
-    const newComment = 
-    {
-        comment: newComments, 
-        likes: 0,
-    } 
-
-    handleSubmit(newComment)
-}
+        setComment('')
+    }
 
     return (
-        <form onSubmit={onSubmit}>
+        <form onSubmit={handleSubmit}>
             <input
                 type="text"
                 id="comment"
                 placeholder="Add comment..."
-                value={newComments}
-                onChange={(e) => setNewComments(e.target.value)}
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
             />
             <button>Post</button>
         </form>
