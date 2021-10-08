@@ -19,8 +19,10 @@ export default function Login({ setUser }) {
                     return res.json()
                         .then((user) => {
                             setUser(user)
+                            console.log(res)
                         })
-                } else {
+                } 
+                else {
                     return res.json().then(errors => Promise.reject(errors))
                     }
                 }
@@ -43,7 +45,7 @@ export default function Login({ setUser }) {
                 </>
             ) : (
                 <>
-                    <SignupForm setUser={setUser} />
+                    <SignupForm setUser={setUser} signup={signup} />
                     <br />
                     <p>
                         Already have an account? &nbsp;

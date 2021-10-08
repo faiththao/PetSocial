@@ -15,9 +15,6 @@ export default function SignupForm({ signup }) {
             password,
             password_confirmation: passwordConfirmation,
         })
-        setUsername('')
-        setPassword('')
-        setPasswordConfirmation('')
     }
 
     return (
