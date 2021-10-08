@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
-    has_many :user_posts
-    has_many :comments, through: :users
+    belongs_to :user
+    has_many :comments
 
     validates :img_url, presence: true
+
 end

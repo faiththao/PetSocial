@@ -1,36 +1,24 @@
 import { Link } from "react-router-dom";
+import { Nav, NavLinks, NavMenu } from './NavElements'
 
-export default function Navbar({ user, setUser }) {
-    // function handleLogoutClick() {
-    //     fetch("/logout", { 
-    //       method: "DELETE",
-    //       headers: {
-    //         Accept: "*/*",
-    //         "Content-type": "application/json"
-    //       }, 
-    //     }).then((r) => {
-    //       if (r.ok) {
-    //         setUser(null);
-    //       }
-    //     });
-    //   }
+export default function Navbar({ handleLogoutClick }) {
     return (
-        <>
+        <Nav>
         <Link to="/">Pet Social</Link>
-        <div>
-          <button as={Link} to="/explore">
+        <NavMenu>
+          <NavLinks to="/explore">
             Explore
-          </button>
-          <button as={Link} to="/profile">
+          </NavLinks>
+          <NavLinks to="/profile">
             Profile
-          </button>
-          <button as={Link} to="/new-post">
+          </NavLinks>
+          <NavLinks to="/new-post">
               New Post
-          </button>
+          </NavLinks>
           <button onClick={handleLogoutClick}>
               Logout
           </button>
-        </div>
-        </>
+        </NavMenu>
+        </Nav>
     )
 }

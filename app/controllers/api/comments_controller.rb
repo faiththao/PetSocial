@@ -3,6 +3,10 @@ class Api::CommentsController < ApplicationController
         render json: Comment.all
     end
 
+    def show
+        render json: Comment.find_by(id: params[:post_id])
+    end
+
     def create
         comment = @current_user.posts.comments.create!(comment_params)
         render json: recipe, status: :created

@@ -37,6 +37,28 @@ export default function AuthenticatedApp({ user, setUser }) {
         })
     }
 
+    function updateLikes(id) {
+
+        fetch("/api/posts/:id/likes", {
+            method: "PATCH",
+            headers: {
+                Accept: '*/*',
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(id)
+        })
+        .then(res => console.log(res))
+        // .then(data => setPosts(data.likes))
+    }
+
+    // function handleDelete() {
+    //     fetch("/api/posts/:id", {
+    //         method: "DELETE",
+    //     })
+    // .then(res => res.json())
+    // .then(id => console.log(id))}
+    
+
     function handleLogoutClick() {
         fetch("/api/logout", {
             method: "DELETE",
@@ -66,7 +88,11 @@ export default function AuthenticatedApp({ user, setUser }) {
             </nav>
             <Switch>
                 <Route path="/explore">
-                    <Posts posts={posts} />
+                    <Posts 
+                    posts={posts} 
+                    updateLikes={updateLikes}
+                    // handleDelete={handleDelete} 
+                    />
                 </Route>
                 <Route path="/new-post">
                     <NewPost createPost={createPost} />
