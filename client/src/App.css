@@ -29,6 +29,7 @@ img {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .App-link {
@@ -48,7 +49,14 @@ img {
   background-position: center;
   background-color: ivory;
   padding: 2%;
+  font-family: 'Montserrat', sans-serif;
+  border-top: lightgray, solid;
 }
+
+.post-container {
+  display: inline-flexbox;
+}
+
 .post-card img {
   width: 100%
 }
@@ -60,6 +68,7 @@ nav {
   margin-top: 10px;
   margin-bottom: 10px;
   padding: 10px;
+  font-family: 'Montserrat', sans-serif;
 }
 
 NavLink {
@@ -80,10 +89,12 @@ NavLink {
 
 .username {
   color: ivory;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .post-user {
   text-align: left;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .delete-button {
@@ -99,6 +110,7 @@ NavLink {
   margin-top: 10px;
   margin-bottom: 10px;
   padding: 10px;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .signup {
@@ -108,4 +120,5 @@ NavLink {
   margin-top: 10px;
   margin-bottom: 10px;
   padding: 10px;
+  font-family: 'Montserrat', sans-serif;
 }

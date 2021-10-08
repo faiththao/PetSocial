@@ -15,19 +15,21 @@ export default function PostCard({ post, updateLikes, comments, createComment })
     return (
         <div key={id} className="post-card">
             <strong className="post-user">{user.username}</strong>
-            <button classname="delete-button">X</button>
+            <button className="delete-button">X</button>
             <img src={img_url} alt={caption} />
-            <strong className="caption">{caption}</strong>
-            <p>Likes: {likes} <button onClick={() => updateLikes(id)}>❤</button></p>
+            <div className="post-container">
+                <strong className="caption">{user.username}: {caption}</strong>
+                <p>Likes: {likes} <button onClick={() => updateLikes(id)}>❤</button></p>
+            </div>
             <div className="comments-container">
                 {comments.map(comment => (
                     <CommentsList
-                    key={comment.id}
-                    o_comment={comment}
+                        key={comment.id}
+                        o_comment={comment}
                     />
                 ))}
             </div>
-            <CommentsForm createComment={createComment}/>
+            <CommentsForm createComment={createComment} />
         </div>
     )
 }
