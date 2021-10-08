@@ -4,10 +4,12 @@ import { NavLink, Switch, Route, useHistory } from "react-router-dom";
 import Posts from "./pages/Posts";
 import NewPost from "./pages/NewPost";
 import Profile from "./pages/Profile";
+import Navbar from './components/Navbar';
 
 export default function AuthenticatedApp({ user, setUser }) {
     const history = useHistory()
     const [posts, setPosts] = useState([]);
+    const [comments, setComments] = useState([]);
 
     useEffect(() => {
         fetch("/api/posts")
@@ -39,7 +41,7 @@ export default function AuthenticatedApp({ user, setUser }) {
 
     function updateLikes(id) {
 
-        fetch("/api/posts/:id/likes", {
+        fetch("/api/posts", {
             method: "PATCH",
             headers: {
                 Accept: '*/*',
@@ -57,6 +59,38 @@ export default function AuthenticatedApp({ user, setUser }) {
     //     })
     // .then(res => res.json())
     // .then(id => console.log(id))}
+
+    
+
+    useEffect(() => {
+        fetch("/api/comments")
+            .then(res => res.json())
+            .then(data => setComments(data))
+    })
+
+
+
+    const createComment = (formData) => {
+        return fetch("/api/comments", {
+            method: "POST",
+            headers: {
+                Accept: '*/*',
+                "Content-Type": "application/json"
+            },
+            credentials: 'include',
+            body: JSON.stringify(formData)
+        })
+        .then(res => {
+            if (res.ok) {
+                return res.json()
+            } else {
+                return res.json().then(errors => Promise.reject(errors))
+            }
+        })
+        .then(comment => {
+            setComments(comments.concat(comment))
+        })
+    }
     
 
     function handleLogoutClick() {
@@ -69,36 +103,34 @@ export default function AuthenticatedApp({ user, setUser }) {
         }).then((r) => {
             if (r.ok) {
                 setUser(null)
-                history.push('/')
+                // history.push('/')
             }
         });
     }
 
+
     return (
         <div>
             <nav>
-                <span>
-                    <NavLink to="/explore">Explore</NavLink>
-                    <NavLink to="/new-post">New Post</NavLink>
-                    <NavLink to="/profile">Profile</NavLink>
-                </span>
-                <span>
-                Welcome, {user.username} <button onClick={handleLogoutClick}>Logout</button>
-                </span>
+                <Navbar 
+                user={user}
+                handleLogoutClick={handleLogoutClick} />
             </nav>
             <Switch>
                 <Route path="/explore">
                     <Posts 
                     posts={posts} 
                     updateLikes={updateLikes}
-                    // handleDelete={handleDelete} 
+                    // handleDelete={handleDelete}
+                    comments={comments}
+                    createComment={createComment}
                     />
                 </Route>
                 <Route path="/new-post">
                     <NewPost createPost={createPost} />
                 </Route>
                 <Route path="/profile">
-                    <Profile />
+                    <Profile user={user} posts={posts}/>
                 </Route>
             </Switch>
         </div>

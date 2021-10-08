@@ -21,7 +21,7 @@ export default function SignupForm({ signup }) {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} classname="signup">
             <h2 htmlFor="username">Username</h2>
             <input
                 type="text"

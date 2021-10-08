@@ -1,11 +1,13 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Nav, NavLinks, NavMenu } from './NavElements'
 
-export default function Navbar({ handleLogoutClick }) {
+export default function Navbar({ user, handleLogoutClick }) {
     return (
         <Nav>
-        <Link to="/">Pet Social</Link>
-        <NavMenu>
+        <NavLinks calssname="logo-nav" to="/">
+        🐾 Pet Social
+        </NavLinks>
+        <menubar>
           <NavLinks to="/explore">
             Explore
           </NavLinks>
@@ -15,10 +17,11 @@ export default function Navbar({ handleLogoutClick }) {
           <NavLinks to="/new-post">
               New Post
           </NavLinks>
-          <button onClick={handleLogoutClick}>
+          Welcome, {user.username}
+          <button onClick={() => handleLogoutClick()}>
               Logout
           </button>
-        </NavMenu>
+        </menubar>
         </Nav>
     )
 }

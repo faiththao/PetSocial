@@ -29,7 +29,7 @@ export default function Login({ setUser }) {
 
     return (
         <div>
-            <h1>Login or Sign Up</h1>
+            <h1>🕸Login or Sign Up🕸</h1>
             {showLogin ? (
                 <>
                     <LoginForm signup={signup} setUser={setUser} />
@@ -53,6 +53,9 @@ export default function Login({ setUser }) {
                     </p>
                 </>
             )}
+            <br />
+            <h3 classname="login-page"> Happy Halloween 👻 </h3>
+            <img src="https://www.multivu.com/players/English/8946051-petsmart-halloween-costume-collection/image/PetsinCostumes_1630521797367-HR.jpg" alt="spooky pets" />
         </div>
     )
 }

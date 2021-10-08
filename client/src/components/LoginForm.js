@@ -33,7 +33,7 @@ export default function LoginForm({ setUser }) {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="login">
             <h2 htmlFor="username">Username</h2>
             <input
                 type="text"

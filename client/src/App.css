@@ -1,5 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
+img {
+  width: 100%;
+}
+
 .App {
   text-align: left;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .App-logo {
@@ -44,4 +51,61 @@
 }
 .post-card img {
   width: 100%
+}
+
+nav {
+  display: inline-flexbox;
+  border: ivory;
+  background-color: ivory;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+NavLink {
+  display: inline-flexbox;
+  border: gainsboro;
+  text-align: right;
+  margin-right: 5px;
+}
+
+.logo-nav {
+  text-align: left;
+}
+
+.logo-nav img {
+  width: 20px;
+  height: 20px;
+}
+
+.username {
+  color: ivory;
+}
+
+.post-user {
+  text-align: left;
+}
+
+.delete-button {
+  background-color: ivory;
+  color: red;
+  float: right;
+}
+
+.login {
+  display: inline-flexbox;
+  border: ivory;
+  background-color: ivory;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.signup {
+  display: inline-flexbox;
+  border: ivory;
+  background-color: ivory;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
 }
